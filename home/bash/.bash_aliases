@@ -5,7 +5,7 @@
 #############################
 
 alias be="bundle exec"
-alias ls="ls -FG --color=auto" # shows different filetypes in different colors
+alias ls="ls -FG" # shows different filetypes in different colors
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias zgrep='zgrep --color=auto'
@@ -14,6 +14,8 @@ alias du='du -c'
 alias jcurl='curl -H "Content-Type: application/json"'
 alias rvim="vim -R" # opens vim in read-only mode
 alias pp="$HOME/.pretty_printer"
+alias v="vim"
+alias vi="nvim"
 
 #############################
 #       GIT ALIASES         #

@@ -14,4 +14,3 @@ set expand-tilde On
 # alt+arrows
 "\e[1;9D": backward-word
 "\e[1;9C": forward-word
-

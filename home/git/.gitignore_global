@@ -40,3 +40,9 @@ ehthumbs.db
 Thumbs.db
 
 vendor
+
+# Vim swp files
+*.swp
+
+# vs code
+.vscode/

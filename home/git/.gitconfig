@@ -19,7 +19,7 @@
 	hist = log -p # arg is path to file
 [user]
 	name = Brian Deane
-	email = bdeanemachine@gmail.com
+	email = brian.deane@humaninterest.com
 [color]
 	diff = true
 	log = true
@@ -39,6 +39,6 @@
 	untracked = red
 [core]
 	editor = vim
-	excludesfile = '~/.gitignore_global'
+	excludesfile = ~/.gitignore_global
 [grep]
   lineNumber = true
