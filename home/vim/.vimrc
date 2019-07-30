@@ -125,6 +125,8 @@ nmap <silent> <C-/> gcck<CR>
 map <silent> <leader>ff :FZF<CR>
 map <silent> <C-f> :FZF<CR>
 
+nmap cp :let @" = expand("%")<cr>
+
 " if file is larger than 10mb
 let g:LargeFile = 1024 * 1024 * 10
 augroup LargeFile
