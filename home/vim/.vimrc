@@ -114,6 +114,8 @@ vnoremap <C-s> :update<Enter>
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
+nnoremap <silent> <C-t> :NERDTreeToggle<CR>
+vnoremap <silent> <C-t> :NERDTreeToggle<CR>
 
 vmap <silent> <LocalLeader>cc gck<CR>
 nmap <silent> <LocalLeader>cc gcck<CR>
