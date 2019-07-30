@@ -719,9 +719,9 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>-1773 952 796 486 -2560 384 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>723 0 714 877 0 0 1440 877 </string>
+	<string>0 0 2560 1417 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 0 1440 877 0 0 1440 877 </string>
+	<string>-2560 349 2560 1417 -2560 349 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1501,20 +1501,28 @@
 	<array>
 		<string>3.2.9</string>
 		<string>3.3.0beta13</string>
+		<string>3.3.0beta15</string>
 	</array>
+	<key>NoSyncFrame_SessionsPreferences</key>
+	<dict>
+		<key>screenFrame</key>
+		<string>{{0, 0}, {2560, 1440}}</string>
+		<key>topLeft</key>
+		<string>{977, 1192}</string>
+	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1440, 900}}</string>
+		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{245, 706}</string>
+		<string>{953, 899}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>F6A05A17-A6EC-43C1-AAC5-2DA758838E38</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>24</integer>
+	<integer>34</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1907,6 +1915,22 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>frame</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>style</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>currentTab.currentSession.tty</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -2151,6 +2175,11 @@
 			</dict>
 		</array>
 	</dict>
+	<key>NoSyncSearchHistory</key>
+	<array>
+		<string>t   j    </string>
+		<string>ƒƒasdf</string>
+	</array>
 	<key>NoSyncSuppressClipboardAccessDeniedWarning</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -2231,8 +2260,10 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-07-22T17:12:44Z</date>
+	<date>2019-07-30T16:13:33Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
@@ -2293,7 +2324,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.0beta13</string>
+	<string>3.3.0beta15</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
