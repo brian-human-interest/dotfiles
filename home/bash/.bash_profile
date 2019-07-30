@@ -10,8 +10,8 @@ export HISTCONTROL=ignorespace
 # saves history while in tmux
 export PROMPT_COMMAND='history -a'
 
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="vi"
+export VISUAL="vi"
 
 # stop here if the shell is not interactive
 # the substitution checks for the string "i"
