@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'Raimondi/delimitMate'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'mhinz/vim-startify'
 Plug 'pangloss/vim-javascript'
