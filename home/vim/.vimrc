@@ -1,6 +1,10 @@
 filetype plugin indent on
 syntax enable
-syntax sync minlines=10000 " helps fix syntax highlighting on large files when hopping around
+
+" helps fix syntax highlighting on large files when hopping around
+syntax sync minlines=10000
+set redrawtime=10000
+syntax sync fromstart
 
 set nocompatible
 
@@ -16,15 +20,15 @@ let g:materialmonokai_italic=1
 colorscheme material-monokai
 
 " fuzzy finder settings
-set path+=**
-set wildmenu
+" set path+=**
+" set wildmenu
 
 " set foldmethod=indent
 set helpheight=999
 set ruler
 set hlsearch
 set wrapscan
-set mouse=h " for neovim
+" set mouse=h " for neovim
 set number
 set ignorecase
 set smartcase
@@ -45,9 +49,9 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-endif
+" if has('nvim')
+"   tnoremap <Esc> <C-\><C-n>
+" endif
 
 autocmd FileType haskell setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
@@ -57,8 +61,9 @@ autocmd FileType python setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 
 autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+au BufNewFile,BufFilePre,BufRead *.bash set filetype=sh
 
-runtime macros/matchit.vim
+" runtime macros/matchit.vim
 
 " automatically save sessions
 let g:startify_session_persistence = 1
@@ -69,10 +74,10 @@ let g:startify_session_persistence = 1
 
 " Tweaks for browsing
 " thanks to https://github.com/mcantor/no_plugins/blob/0a313c353899d3d4e51b754b15027c4452120f79/no_plugins.vim#L120-L133
-let g:netrw_banner=0        " disable annoying banner
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
+" let g:netrw_banner=0        " disable annoying banner
+" let g:netrw_browse_split=4  " open in prior window
+" let g:netrw_altv=1          " open splits to the right
+" let g:netrw_liststyle=3     " tree view
 " let g:netrw_list_hide=netrw_gitignore#Hide()
 " let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
@@ -108,8 +113,8 @@ nnoremap ^ 0
 " vnoremap q: :
 
 " quick save
-nnoremap <C-s> :update<Enter>
-vnoremap <C-s> :update<Enter>
+" nnoremap <C-s> :update<Enter>
+" vnoremap <C-s> :update<Enter>
 
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
@@ -117,14 +122,17 @@ map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 nnoremap <silent> <C-t> :NERDTreeToggle<CR>
 vnoremap <silent> <C-t> :NERDTreeToggle<CR>
 
+" comments
 vmap <silent> <LocalLeader>cc gck<CR>
 nmap <silent> <LocalLeader>cc gcck<CR>
 vmap <silent> <C-/> gck<CR>
 nmap <silent> <C-/> gcck<CR>
 
+" fuzzy find
 map <silent> <leader>ff :FZF<CR>
 map <silent> <C-f> :FZF<CR>
 
+" copy current filepath into vim clipboard
 nmap cp :let @" = expand("%")<cr>
 
 " if file is larger than 10mb
@@ -134,14 +142,18 @@ augroup LargeFile
 augroup END
 
 " shortcut to execute file
-noremap <Leader>e :call Execute()<CR>
-fun! Execute()
-  :execute 'update'
-  :execute '! ./%'
-endfun
+" noremap <Leader>e :call Execute()<CR>
+" fun! Execute()
+"   :execute 'update'
+"   :execute '! ./%'
+" endfun
 
 set tabline=%!MyTabLine()
 set showtabline=2
+
+" helpful console.log shortcut in js/ts land
+autocmd FileType javascript inoremap <C-l> console.log();<Left><Left>
+autocmd FileType typescript inoremap <C-l> console.log();<Left><Left>
 
 " could be interesting
 " Ctrl j/k to navigate horizontal splits
@@ -231,11 +243,10 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_lint_delay = 0 " will this be fast?
+nmap <silent> <C-h> <Plug>(ale_previous_wrap)
+nmap <silent> <C-l> <Plug>(ale_next_wrap)
 
 " fzf
-" let $FZF_DEFAULT_COMMAND = 'find . -name "*" -type f 2>/dev/null                                                         
-"                             \ | grep -v -E "tmp\/|.gitmodules|.git\/|deps\/|build\/|node_modules\/|vendor\/|dist\/|dist_server\/|gopkg.in\/|gometalinter\/|golang.org\/|github.com\/|migrations\/"
-"                             \ | sed "s|^\./||"'                                                                          
 let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude .git'
 let $FZF_DEFAULT_OPTS = '--reverse'
 let g:fzf_tags_command = 'ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f'
@@ -246,9 +257,9 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 
 
-command! -nargs=* SmartFuzzy :call SmartFuzzy()
-
 " nerdtree
 let NERDTreeIgnore=['\.pyc$', '\.o$', '\.class$', '\.lo$', 'tmp']
 let NERDTreeHijackNetrw = 0
 let g:netrw_banner = 0
+
+command NF :NERDTreeFind
