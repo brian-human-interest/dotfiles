@@ -1,7 +1,6 @@
 # only sources these if they exist
 [[ -r ~/.git-completion.bash ]] && . ~/.git-completion.bash
 [[ -r ~/.bash_aliases ]] && . ~/.bash_aliases
-[[ -r ~/.bash_profile.local ]] && . ~/.bash_profile.local
 
 export HISTTIMEFORMAT="%F %T "
 export HISTSIZE=10000
@@ -30,6 +29,21 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent)
     ssh-add
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# Setting PATH for Python 3.7
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
+export PATH
+
+# these should overwrite anything above
+[[ -r ~/.bash_profile.local ]] && . ~/.bash_profile.local
 
 # tmux/screen code needs to be loaded after
 # everything else. it looks like starting
@@ -65,8 +79,3 @@ then
         fi
     fi
 fi
-
-# Setting PATH for Python 3.7
-# The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
-export PATH
