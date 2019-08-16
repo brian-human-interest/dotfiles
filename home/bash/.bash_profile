@@ -1,6 +1,7 @@
 # only sources these if they exist
 [[ -r ~/.git-completion.bash ]] && . ~/.git-completion.bash
 [[ -r ~/.bash_aliases ]] && . ~/.bash_aliases
+[[ -r ~/.bash_psql ]] && . ~/.bash_psql
 
 export HISTTIMEFORMAT="%F %T "
 export HISTSIZE=10000

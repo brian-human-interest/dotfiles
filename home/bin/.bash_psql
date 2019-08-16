@@ -1,0 +1,103 @@
+# To use this script:
+# Copy it to your $HOME directory
+# Add 'source ~/.bash_psql' to your .bash_profile
+
+# Sets the active DB by ISO date
+function usedb () {
+  DB_NAME="captain401-provider-$1";
+  if psql -lt | grep -wq $DB_NAME;
+  then
+    export CURRENT_DB=$DB_NAME && export DATABASE_URL="postgres://localhost/$CURRENT_DB?sslmode=disable"
+  else
+    echo "No db for this date exists"
+  fi
+}
+
+# Lists local DBs
+function listdb () {
+  psql -l | grep -Eo captain401-[a-zA-Z0-9\-]* | grep captain401-provider
+}
+
+# Runs migrations on current DB
+# TODO: find a better way to do this
+function migrate () {
+  echo '{
+    "url": "postgres://localhost/'$CURRENT_DB'?sslmode=disable",
+    "database": "'$CURRENT_DB'",
+    "dialect": "postgres",
+    "native": true,
+    "ssl": false,
+    "dialectOptions": {
+      "ssl": {
+        "require": false
+      }
+    }
+  }' > config/db_local.json;
+  make migrate-all
+  git checkout config/db_local.json
+}
+
+# Runs down migration on current DB
+# TODO: find a better way to do this
+function unmigrate () {
+  echo '{
+    "url": "postgres://localhost/'$CURRENT_DB'?sslmode=disable",
+    "database": "'$CURRENT_DB'",
+    "dialect": "postgres",
+    "native": true,
+    "ssl": false,
+    "dialectOptions": {
+      "ssl": {
+        "require": false
+      }
+    }
+  }' > config/db_local.json;
+  make unmigrate-all
+  git checkout config/db_local.json
+}
+
+# Pulls the latest backup from heroku and restores it to a new DB
+function fetchdb () {
+  NAME_DATE=$(heroku pg:backups --app capn401dash | head -4 | tail -1 | grep -Eo '^([^ ]+)[ ]*([^ ]+)')
+
+  IFS=' ' read -ra NAME_DATE <<< "$NAME_DATE"
+
+  NAME=${NAME_DATE[0]};
+  DATE=${NAME_DATE[1]};
+
+  DB_NAME="captain401-provider-$DATE";
+  DB_PATH="${HOME}/db/${NAME}_${DATE}.dump";
+
+  if psql -lt | grep -wq $DB_NAME;
+  then
+    echo "$DB_NAME already exists";
+  else
+    echo "Downloading backup $NAME to $DB_PATH";
+    heroku pg:backups:download $NAME --app capn401dash -o $DB_PATH;
+    createdb $DB_NAME;
+    pg_restore --verbose --clean --no-acl --no-owner -d $DB_NAME $DB_PATH;
+  fi
+}
+
+# Restores a DB from local backup by ISO date
+function restoredb () {
+  DATE=$1
+  DB_NAME="captain401-provider-$DATE";
+  if psql -lt | grep -wq $DB_NAME;
+  then
+    FILE_NAME=$(ls ${HOME}/db | grep ${DATE})
+    if test -z "$FILE_NAME"
+    then
+      echo "Dump file not found"
+    else
+      DB_PATH="${HOME}/db/${FILE_NAME}";
+      echo "Restoring ${DB_PATH} to ${DB_NAME}..."
+      pg_restore --verbose --clean --no-acl --no-owner -d $DB_NAME $DB_PATH;
+    fi
+  else
+    echo "No db for this date exists"
+  fi
+}
+
+# Set active DB to latest
+export CURRENT_DB=$(psql -l | grep -Eo captain401-[a-zA-Z0-9\-]* | grep captain401-provider | tail -n 1) && export DATABASE_URL="postgres://localhost/$CURRENT_DB?sslmode=disable"
