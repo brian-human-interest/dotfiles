@@ -135,6 +135,12 @@ map <silent> <C-f> :FZF<CR>
 " copy current filepath into vim clipboard
 nmap cp :let @" = expand("%")<cr>
 
+" basic emacs motions in insert mode
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-a> <Esc>I
+inoremap <C-e> <Esc>A
+
 " if file is larger than 10mb
 let g:LargeFile = 1024 * 1024 * 10
 augroup LargeFile
@@ -262,4 +268,5 @@ let NERDTreeIgnore=['\.pyc$', '\.o$', '\.class$', '\.lo$', 'tmp']
 let NERDTreeHijackNetrw = 0
 let g:netrw_banner = 0
 
-command NF :NERDTreeFind
+command! NF :NERDTreeFind
+command! Nf :NERDTreeFind
