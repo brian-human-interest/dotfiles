@@ -10,6 +10,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'skielbasa/vim-material-monokai'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
 
